@@ -46,11 +46,11 @@ begin
     if (Buffer.Size > 0) then
     begin
       Buffer.SaveToFile('azaza.txt');
-      PrintMessage(Buffer.Size.ToString+' butes receive');
+      PrintMessage(Buffer.Size.ToString+' bytes receive');
       Buffer.Clear;
       Buffer.LoadFromFile('lol.txt');
       Socket.Write(Buffer);
-      PrintMessage(Buffer.Size.ToString+' butes send');
+      PrintMessage(Buffer.Size.ToString+' bytes send');
       Socket.InputBuffer.Clear;
       Buffer.Free;
       // Disconnect;
