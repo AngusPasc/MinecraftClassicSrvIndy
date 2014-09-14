@@ -48,12 +48,12 @@ begin
     if (Buffer.Size > 0) then
     begin
       Buffer.SaveToFile('azaza.txt');
-      PrintMessage(Buffer.Size.ToString + ' butes receive');
+  //    PrintMessage(Buffer.Size+ ' butes receive');
       Buffer.Clear;
       Buffer.LoadFromFile('lol.txt');
       Socket.Write(Buffer);
 
-      PrintMessage(Buffer.Size.ToString + ' butes send');
+   //   PrintMessage(Buffer.Size.ToString + ' butes send');
       Socket.InputBuffer.Clear;
       Buffer.Free;
       // Disconnect;
@@ -81,9 +81,9 @@ begin
   inherited Create;
   IdTCPServer1 := TIdTCPServer.Create(nil);
   IdTCPServer1.Bindings.Clear;
-  IdTCPServer1.DefaultPort := 7777;
-  IdTCPServer1.Bindings.Add.Port := 7777;
-  IdTCPServer1.Bindings.Add.IP := '127.0.0.1';
+  IdTCPServer1.DefaultPort := Config.Cgf.ServerPort;
+  IdTCPServer1.Bindings.Add.Port := Config.Cgf.ServerPort;
+  IdTCPServer1.Bindings.Add.IP := Config.Cgf.ServerIP;
   IdTCPServer1.Tag := 0;
   IdTCPServer1.TerminateWaitTime := 5000;
   IdTCPServer1.OnConnect := IdTCPServer1Connect;
@@ -94,9 +94,9 @@ var
   Server: TServer;
 
 begin
-
-  ReportMemoryLeaksOnShutdown := True;
+//  ReportMemoryLeaksOnShutdown := True;
   LoadCgf;
+  HeartBeat.Create;
   Server := TServer.Create;
   Server.IdTCPServer1.Active := True;
   While True do
