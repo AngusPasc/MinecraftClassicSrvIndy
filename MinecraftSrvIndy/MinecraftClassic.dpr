@@ -19,7 +19,9 @@ uses
   IdSSL,
   IdGlobal,
   Classes,
-  ConsoleMsg in 'Tools\ConsoleMsg.pas';
+  ConsoleMsg in 'Tools\ConsoleMsg.pas',
+  HeartBeat in 'Tools\HeartBeat.pas',
+  Config in 'Tools\Config.pas';
 
 type
   TServer = class(TObject)
@@ -46,11 +48,11 @@ begin
     if (Buffer.Size > 0) then
     begin
       Buffer.SaveToFile('azaza.txt');
-      PrintMessage(Buffer.Size.ToString+' bytes receive');
+      PrintMessage(Buffer.Size.ToString + ' butes receive');
       Buffer.Clear;
       Buffer.LoadFromFile('lol.txt');
       Socket.Write(Buffer);
-      PrintMessage(Buffer.Size.ToString+' bytes send');
+      PrintMessage(Buffer.Size.ToString + ' butes send');
       Socket.InputBuffer.Clear;
       Buffer.Free;
       // Disconnect;
@@ -91,7 +93,9 @@ var
   Server: TServer;
 
 begin
+
   ReportMemoryLeaksOnShutdown := True;
+  LoadCgf;
   Server := TServer.Create;
   Server.IdTCPServer1.Active := True;
   While True do
