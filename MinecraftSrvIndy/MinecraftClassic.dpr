@@ -52,6 +52,7 @@ begin
       Buffer.Clear;
       Buffer.LoadFromFile('lol.txt');
       Socket.Write(Buffer);
+
       PrintMessage(Buffer.Size.ToString + ' butes send');
       Socket.InputBuffer.Clear;
       Buffer.Free;
