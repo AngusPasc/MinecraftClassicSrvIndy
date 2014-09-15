@@ -21,7 +21,8 @@ uses
   Classes,
   ConsoleMsg in 'Tools\ConsoleMsg.pas',
   HeartBeat in 'Tools\HeartBeat.pas',
-  Config in 'Tools\Config.pas';
+  Config in 'Tools\Config.pas',
+  PacketManager in 'Packet\PacketManager.pas';
 
 type
   TServer = class(TObject)
@@ -39,40 +40,35 @@ procedure TServer.IdTCPServer1Execute(AContext: TIdContext);
 var
   Buffer: TMemoryStream;
 begin
+
+  // PacketManager.Manager.Create.Input(AContext, '');
+
   Buffer := TMemoryStream.Create;
 
   with AContext.Connection do
   begin
     if IOHandler.CheckForDataOnSource(1000) then
-      Socket.InputBuffer.SaveToStream(Buffer);
-    if (Buffer.Size > 0) then
-    begin
-      Buffer.SaveToFile('azaza.txt');
-  //    PrintMessage(Buffer.Size+ ' butes receive');
-      Buffer.Clear;
-      Buffer.LoadFromFile('lol.txt');
-      Socket.Write(Buffer);
 
-   //   PrintMessage(Buffer.Size.ToString + ' butes send');
-      Socket.InputBuffer.Clear;
-      Buffer.Free;
-      // Disconnect;
-      // Socket.Close;
+    while IOHandler.Connected= True do
+    begin
+
+         while IOHandler.InputBuffer.Size>0 do
+           begin
+           WriteLn(IOHandler.ReadLn(nil));
+           IOHandler.WriteLn('HTTP/1.1 301 Moved Permanently'+#13#10+'Location: http://127.0.0.1:7777/gggggg');
+         //  Disconnect;
+           end;
+
     end;
+
+
+
 
   end;
 end;
 
 procedure TServer.IdTCPServer1Connect(AContext: TIdContext);
-var
-  Buffer: TMemoryStream;
 begin
-  Buffer := TMemoryStream.Create;
-
-  with AContext.Connection do
-  begin
-
-  end;
 
 end;
 
@@ -94,12 +90,12 @@ var
   Server: TServer;
 
 begin
-//  ReportMemoryLeaksOnShutdown := True;
+  ReportMemoryLeaksOnShutdown := True;
   LoadCgf;
   HeartBeat.Create;
   Server := TServer.Create;
   Server.IdTCPServer1.Active := True;
   While True do
-    sleep(60);
+    sleep(1);
 
 end.
