@@ -37,34 +37,25 @@ type
   end;
 
 procedure TServer.IdTCPServer1Execute(AContext: TIdContext);
-var
-  Buffer: TMemoryStream;
 begin
+  // with AContext.Connection do
+  // begin
+  // if IOHandler.CheckForDataOnSource(1000) then
 
-  // PacketManager.Manager.Create.Input(AContext, '');
+  // while IOHandler.Connected = True do
+  // begin
+  // Writeln(AContext.Connection.Socket.InputBuffer.Size);
+  // while IOHandler.InputBuffer.Size > 0 do
+  // begin
+  PacketManager.Manager.Create.Input(AContext);
+  // WriteLn('Текущий размер буфера: '+IntToStr(IOHandler.InputBuffer.Size));
+  // IOHandler.WriteLn('HTTP/1.1 301 Moved Permanently'+#10#13+'http://127.0.0.1:7777/ololololololololo');
+  // Disconnect;
+  // end;
 
-  Buffer := TMemoryStream.Create;
+  // end;
 
-  with AContext.Connection do
-  begin
-    if IOHandler.CheckForDataOnSource(1000) then
-
-    while IOHandler.Connected= True do
-    begin
-
-         while IOHandler.InputBuffer.Size>0 do
-           begin
-           WriteLn(IOHandler.ReadLn(nil));
-           IOHandler.WriteLn('HTTP/1.1 301 Moved Permanently'+#13#10+'Location: http://127.0.0.1:7777/gggggg');
-         //  Disconnect;
-           end;
-
-    end;
-
-
-
-
-  end;
+  // end;
 end;
 
 procedure TServer.IdTCPServer1Connect(AContext: TIdContext);
