@@ -64,16 +64,13 @@ begin
     begin
     end;
 
-    WriteLn('Πΰημεπ αστεπΰ β onjoin: ' + IntToStr(IOHandler.InputBuffer.Size));
+    WriteLn('ΓΓ Γ§Γ¬Γ¥Γ° Γ΅Γ³Γ΄Γ¥Γ°Γ  ΓΆ onjoin: ' + IntToStr(IOHandler.InputBuffer.Size));
     UserName := IOHandler.ReadString(64, nil);
-    WriteLn('Πΰημεπ αστεπΰ οξρλε νθκΰ: ' +IntToStr(IOHandler.InputBuffer.Size));
+    WriteLn('ΓΓ Γ§Γ¬Γ¥Γ° Γ΅Γ³Γ΄Γ¥Γ°Γ  Γ―Γ®Γ±Γ«Γ¥ Γ­Γ¨ΓªΓ : ' +IntToStr(IOHandler.InputBuffer.Size));
     MD5 := (IOHandler.ReadString(64, nil));
-    WriteLn('Πΰημεπ αστεπΰ οξρλε md5: ' + IntToStr(IOHandler.InputBuffer.Size));
+    WriteLn('ΓΓ Γ§Γ¬Γ¥Γ° Γ΅Γ³Γ΄Γ¥Γ°Γ  Γ―Γ®Γ±Γ«Γ¥ md5: ' + IntToStr(IOHandler.InputBuffer.Size));
     IOHandler.InputBuffer.Clear;
-  //  if UpperCase(MD5.Replace(' ','')) = (MD5Hash(Config.Cgf.ServerSalt+UserName.Replace(' ',''))) then
-  //  begin
-  //     WriteLn('Done');
-  //  end;
+
   end;
 end;
 
